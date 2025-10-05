@@ -3,230 +3,380 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dog Breed CLassification</title>
-	<link rel="shortcut icon"
-        href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAAgACADASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAABQYHCAT/xAAsEAABAwMDAwIFBQAAAAAAAAABAgMEBQYRACExBwgSIkETFFFxgRUjQmGh/8QAFwEBAQEBAAAAAAAAAAAAAAAABAIAAf/EACIRAAICAgEDBQAAAAAAAAAAAAEDAgQAEUEFE1ESITFh8P/aAAwDAQACEQMRAD8AxRb9PQ54+kHjXO9V7jrdwqty04jzqxIERpthnyceczjcnYAnPuNhrutma00lPkoAD31YellMp0CpuVeh1arR5lTmIBiU9ryD5UnCiVfTZWB9SeMaJdsSrK9cRs4/ptQXXhUjoZG4S7lYuNyzbsosiNNCFlSXmghxBSM5ONlJOORoXcFH+XcUEo5P01oC7qPbsaoN1p+fUpdSZjOtKXUDhxClrSD6v5pASoAn3JxnUeut9pbiy2B99ak82Uhkho5zqNUUrBUDv9z95pTtF6BWzNs6m9T7pjJqE+qFxyDFkJCo8eOCUJWUEYW4rCjlWQARgZydP3X7pHWqrHplzWAgR6rTW1xAyyhAQ4yoghPgcJ2IOONGu3SHOhdv9kuRXQpbdGYcDa9jheVHB/PHGnpu6odYgnwWEn4YcydvTjOfwRprFByis84RLpIaGR+Rkr7fulVSpf6nWb7gpfmVRkR3W5jSF/EwoKJ8N0hKQEgD7nbbK73O9ttmIsesX/Z1OTSapRoxmPRogxGlNJIKwW+ErCcqCk4zjBB5FuVdbdNYalLLDSlkLWlef22MEnxxwrbyJO25/rQjqbLl1ToVdVUbKFGZQJj6AN/SphRH+Y1CERrq7cePOXZsSst7svbfjP/Z" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<style>
-		body{background-color: #eff2f9;}
-		.iupload h3{color: #1b2d6b;font-size: 30px;font-weight: 700;}
-		.img-part{height:300px;width:300px;margin:0px auto;}
-		.image-part{height:300px;width:300px;border:1px solid #1b2d6b;}
-		.image-part img{position:absolute;height: 300px;width:300px;display:none;padding:5px;}
-		.image-part #video{display:block;height: 300px;width:300px;padding:5px;}
-		.res-part{border:1px solid #dedede;margin-left:20px;height: 310px;width:100%;padding:5px;margin:0px auto;overflow:auto;}
-		.res-part2{border:1px solid #dedede;height: 310px;width:100%;padding:5px;margin:0px auto;}
-		.resp-img{height: 298px;width: 233px;margin:0px auto;}
-		.jsonRes{margin-left:30px;}
-		#send{cursor:pointer;}
-		.btn-part{width:325px;}
-		textarea,
-		select,
-		.form-control,
-		.custom-select,
-		button.btn,
-		.btn-primary,
-		input[type="text"],
-		input[type="url"],
-		.uneditable-input{
-			border: 1px solid #363e75;
-			outline: 0 !important;
-			border-radius:0px;
-			box-shadow: none;
-		   -webkit-box-shadow: none;
-		   -moz-box-shadow: none;
-		   -moz-transition: none;
-		   -webkit-transition: none;
-		}
-		textarea:focus,
-		select:focus,
-		.form-control:focus,
-		.btn:focus,
-		.btn-primary:focus,
-		.custom-select:focus,
-		input[type="text"]:focus,
-		.uneditable-input:focus{
-			border: 1px solid #007bff;
-			outline: 0 !important;
-			border-radius:0px;
-			box-shadow: none;
-		   -webkit-box-shadow: none;
-		   -moz-box-shadow: none;
-		   -moz-transition: none;
-		   -webkit-transition: none;
-		}
-		#loading {
-			position: fixed;
-			left: 0px;
-			top: 0px;
-			width: 100%;
-			height: 100%;
-			z-index: 9999999999;
-			overflow: hidden;
-			background: rgba(255, 255, 255, 0.7);
-		}
-		.loader {
-			border: 8px solid #f3f3f3;
-			border-top: 8px solid #363e75;
-			border-radius: 50%;
-			width: 60px;
-			height: 60px;
-			left: 50%;
-			margin-left: -4em;
-			display: block;
-			animation: spin 2s linear infinite;
-		}
-		.loader,
-		.loader:after {display: block;position: absolute;top: 50%;margin-top: -4.05em;}
-		@keyframes spin {
-			0% {
-				transform: rotate(0deg);
-			}
-			100% {
-				transform: rotate(360deg);
-			}
-		}
-		.right-part{border:1px solid #dedede;padding:5px;}
-		.logo{position:absolute;right:0px;bottom:0px;margin-right:30px;margin-bottom:30px;}
-	</style>
+    <title>Dog Breed Predction by Atharv</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for a joyful, high-contrast, playful theme */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fef3c7; /* Light Yellow background */
+            min-height: 100vh;
+        }
+
+        /* Primary Brand Color: Bright Teal (#14b8a6) */
+        /* Secondary Action Color: Sunny Orange (#f97316) */
+        /* Tertiary Accent: White/Soft Gray */
+
+        /* Card and Panel Styling */
+        .app-panel {
+            background-color: #ffffff;
+            border-radius: 2rem; /* Extra large rounding for a soft, friendly look */
+            box-shadow: 0 15px 40px rgba(20, 184, 166, 0.2); /* Teal shadow for a pop */
+            padding: 3rem;
+            border: 2px solid #a7f3d0; /* Light border accent */
+        }
+
+        /* Image Display Area */
+        .image-part {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            border: 4px dashed #67e8f9; /* Vibrant dashed teal border */
+            background-color: #ecfdf5; /* Very light teal background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Image/Video Fit */
+        .image-part img,
+        .image-part video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 6px;
+        }
+        .image-part #video { display: block; object-fit: cover; }
+        .image-part #photo { display: none; }
+
+        /* Result Container Styling */
+        .res-container {
+            height: 370px;
+            overflow: auto;
+            border: 1px solid #fed7aa; /* Light orange border */
+            background-color: #fff7ed; /* Very light orange background */
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+            display: flex; /* Added flex to center result text */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Button Styling (Fun, chunky, shadow) */
+        .btn-base {
+            font-weight: 800; /* Extra bold text */
+            text-transform: uppercase;
+            border-radius: 1rem; 
+            transition: all 0.15s ease-out;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .btn-base:active {
+            transform: translateY(4px);
+        }
+
+        /* Upload Button (Secondary Action - Sunny Orange) */
+        #uload {
+            background-color: #f97316; /* Sunny Orange */
+            color: white;
+            box-shadow: 0 6px 0 0 #ea580c; /* Darker orange shadow */
+        }
+        #uload:hover { background-color: #fb923c; }
+        #uload:active { 
+            background-color: #ea580c; 
+            box-shadow: 0 2px 0 0 #ea580c;
+        }
+
+        /* Predict Button (Primary Action - Bright Teal) */
+        #send {
+            background-color: #14b8a6; /* Bright Teal */
+            color: white;
+            box-shadow: 0 6px 0 0 #0f766e; /* Darker teal shadow */
+        }
+        #send:hover { background-color: #2dd4bf; }
+        #send:active { 
+            background-color: #0f766e; 
+            box-shadow: 0 2px 0 0 #0f766e;
+        }
+
+        /* Loading Overlay */
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .loader {
+            border: 6px solid #fce7f3; 
+            border-top: 6px solid #14b8a6; /* Bright Teal */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* JSON Output Styling (Adjusted for clean text) */
+        .result-text {
+            color: #052e16; /* Dark green for contrast */
+            font-weight: 800;
+            font-size: 2.5rem; /* Large font for focus */
+            line-height: 1.2;
+            text-align: center;
+        }
+        
+        /* --- START OF UNIQUE CSS FINGERPRINT --- */
+        .app-panel::before {
+            content: 'athrv1025'; /* Unique, non-visual identifier */
+            display: none;
+        }
+        /* --- END OF UNIQUE CSS FINGERPRINT --- */
+    </style>
 </head>
-<body>
-    <div class="main container">
-		<section class="iupload">
-			<h3 class="text-center py-4">Dog Breed Classification</h3>
-			<div class="row">
-				<div class="img-part col-md-6">
-					<div class="image-part">
-						<video autoplay id="video" poster="Upload_your_dogs_image.png"></video>
-						<img src="" id="photo">
-						<canvas style="display:none;" id="canvas"></canvas>
-					</div>
-					<div class="btn-part">
-						<form id="upload-data pt-3" class="">
-							<div class="input-group mt-3 row">
-								<button type="button" class="btn btn-primary col-md-5 col-xs-5 ml-3 mr-4" id="uload">Upload</button>
-								<button id="send" type="button" class="btn btn-success col-md-5 col-xs-5">Predict</button>
-							</div>
+<body class="p-4 md:p-8"> <!-- MODIFIED: Reduced body padding for more vertical space -->
+    <!-- UNIQUE HTML COMMENT: Signature by Atharv P.T. - 2025 -->
+    <div class="main max-w-7xl mx-auto">
+        <section class="iupload">
+            <header class="text-center mb-8 pt-4"> <!-- MODIFIED: Reduced mb-16 to mb-8 -->
+                <h1 class="text-6xl md:text-7xl font-extrabold text-[#14b8a6] tracking-tight mb-4 leading-none">
+                    🐾 Paw-sitively Perfect Predictor 🐶
+                </h1>
+                <p class="text-xl text-gray-700 font-medium">Ready to see what breed your doggo is?</p>
+            </header>
 
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- Left Panel: Input Module -->
+                <div class="app-panel">
+                    <h2 class="text-3xl font-bold mb-8 text-[#f97316] border-b-2 border-orange-200 pb-3">1. Snap & Share Your Image</h2>
+                    
+                    <!-- Image/Video Display Area -->
+                    <div class="image-part rounded-3xl">
+                        <!-- Poster attribute serves as initial placeholder -->
+                        <video autoplay id="video" poster="https://placehold.co/700x350/ffffff/14b8a6?text=Upload+Your+Furry+Friend's+Photo+Here"></video>
+                        <img src="" id="photo" alt="Dog Photo for Analysis">
+                        <canvas style="display:none;" id="canvas"></canvas>
+                    </div>
 
+                    <!-- Buttons and Form -->
+                    <div class="btn-part mt-10">
+                        <form id="upload-data" class="space-y-6">
+                            <div class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6">
+                                <!-- UPLOAD Button (id preserved: uload) -->
+                                <button type="button" class="btn-base flex-1 text-white shadow-lg" id="uload">
+                                    Upload New Photo
+                                </button>
+                                
+                                <!-- PREDICT Button (id preserved: send) -->
+                                <button id="send" type="button" class="btn-base flex-1 text-white shadow-lg" id="send">
+                                    Fetch the Verdict!
+                                </button>
+                            </div>
+                            
+                            <!-- Hidden File Input (id preserved: fileinput) -->
+                            <input name="upload" type="file" id="fileinput" accept="image/*" style="position:absolute;top:-500px;"/>
+                            
+                            <!-- Hidden URL Input (id preserved: url, value preserved) -->
+                            <input type="hidden" id="url" value="../predict"/>
+                        </form>
+                    </div>
+                </div>
 
+                <!-- Right Panel: Output Module -->
+                <div class="app-panel">
+                    <h2 class="text-3xl font-bold mb-8 text-[#14b8a6] border-b-2 border-teal-200 pb-3">2. The AI's Verdict</h2>
+                    
+                    <!-- Prediction Result Display -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-4">Predicted Breed:</h3>
+                        <div class="res-container" id="json-output">
+                            <!-- This is the area where the final result is injected -->
+                            <div class="res-part w-full h-full text-gray-800">
+                                <p class="text-gray-500 text-center text-lg font-medium">Your result will show up here!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-
-
-							<!-- change url value  -->
-
-
-
-
-							<input type="hidden" class="form-control mr-2" id="url" placeholder="Enter REST Api url..." value="../predict"/>
-							<input name="upload" type="file" id="fileinput" style="position:absolute;top:-500px;"/><br/>
-						</form>
-					</div>
-				</div>
-				<div class="col-md-6 col-xs-12 right-part">
-					<h5 class="mb-2"><center>Prediction Results</center></h5>
-					<div class="row">
-						<div class="res-part2 col-md-5 col-xs-12"></div>
-						<div class="res-part col-md-5 col-xs-12"><div class="jsonRes"></div></div>
-					</div>
-				</div>
-			</div>
-		</section>
-	</div>
-<div class="logo">By Atharv Prashant Tungatkar</div>
+    <!-- Footer and Attribution -->
+    <footer class="text-center mt-8 pb-8 text-sm text-gray-600"> <!-- MODIFIED: Reduced mt-20 to mt-8 -->
+        <p class="font-bold text-gray-700 mb-1">A project built with love for all the good dogs.</p>
+        <p>© 2025 Paw-sitively Perfect Predictor | By Atharv Prashant Tungatkar.</p>
+    </footer>
 	
-<div id="loading"><div class="loader"></div></div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Loading Overlay (id preserved: loading) -->
+    <div id="loading" style="display:none;">
+        <div class="loader"></div>
+        <div class="ml-4 text-[#14b8a6] font-bold text-xl">Sniffing out the data... Please hold!</div>
+    </div>
 
-<script>
-var mybtn = document.getElementById('startbtn');
-var myvideo = document.getElementById('video');
-var mycanvas = document.getElementById('canvas');
-var myphoto = document.getElementById('photo');
-var base_data = "";
+    <!-- JavaScript Libraries (JQuery, Popper, Bootstrap JS utility) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" xintegrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" xintegrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-function sendRequest(base64Data){
-	var type = "json";
-	if(base64Data != "" || base64Data != null){
-		if(type == "imgtobase"){
-			$(".res-part").html("");
-			$(".res-part").html(base64Data);
-		}
-		else if(type == "basetoimg"){
-			var imageData = $("#imgstring").val();
-			$(".res-part").html("");
-			$(".res-part").append("<img src='data:image/jpeg;base64," + imageData + "' alt='' />");
-		}
-		else{
-			var url = $("#url").val();
-			$("#loading").show();
-			$.ajax({
-				url : url,
-				type: "post",
-				cache: false,
-				async: true,
-				crossDomain: true,
-				headers: {
-					'Content-Type': 'application/json',
-					'Access-Control-Allow-Origin':'*'
-				},
-				data:JSON.stringify({image:base64Data}),
-				success: function(res){
-					$(".res-part").html("");
-					$(".res-part2").html("");
-					try{
-						var imageData = res[1].image;
-						if(imageData.length > 100){
-							if(imageData.length > 10){$(".res-part2").append("<img class='resp-img' src='data:image/jpeg;base64," + imageData + "' alt='' />");}
-						}
-					}catch(e){}
-					$(".res-part").html("<pre>" + JSON.stringify(res[0], undefined, 2) + "</pre>");
-					$("#loading").hide();
-				}
-			});
-		}
-	}
-}
+    <!-- Original JavaScript Logic (Preserved) -->
+    <script>
+        // --- START OF UNIQUE JS FINGERPRINT ---
+        const apt_project_id = 'Pawsitive-Classifier-2025'; // Unique project ID
+        // --- END OF UNIQUE JS FINGERPRINT ---
+        
+        var mybtn = document.getElementById('startbtn');
+        var myvideo = document.getElementById('video');
+        var mycanvas = document.getElementById('canvas');
+        var myphoto = document.getElementById('photo');
+        var base_data = "";
 
-$(document).ready(function(){
-	$("#loading").hide();
+        // *** PART 1: ADDED Helper function to format the breed name (Needed for clean display) ***
+        function formatBreedName(name) {
+            if (!name) return "Unknown Breed";
+            
+            // 1. Replace underscores with spaces
+            let formatted = name.replace(/_/g, ' ');
+            
+            // 2. Capitalize the first letter of each word
+            formatted = formatted.toLowerCase().split(' ').map(word => {
+                return word.charAt(0).toUpperCase() + word.slice(1);
+            }).join(' ');
 
-	$('#send').click(function(evt){
-		sendRequest(base_data);
-    });
+            return formatted;
+        }
 
-    $('#uload').click(function(evt) {
-        $('#fileinput').focus().trigger('click');
-    });
-	$("#fileinput").change(function(){
-		if (this.files && this.files[0]){
-			var reader = new FileReader();
-			reader.onload = function (e){
-				var url = e.target.result;
-				var img = new Image();
-				img.crossOrigin = 'Anonymous';
-				img.onload = function(){
-					var canvas = document.createElement('CANVAS');
-					var ctx = canvas.getContext('2d');
-					canvas.height = this.height;
-					canvas.width = this.width;
-					ctx.drawImage(this, 0, 0);
-					base_data = canvas.toDataURL('image/jpeg', 1.0).replace(/^data:image.+;base64,/, '');
-					canvas = null;
-				};
-				img.src = url;
-				$('#photo').attr('src', url);
-				$('#photo').show();
-				$('#video').hide();
-			}
-			reader.readAsDataURL(this.files[0]);
-		}
-	});
-});
+        function sendRequest(base64Data){
+            var type = "json";
+            if(base64Data != "" || base64Data != null){
+                if(type == "imgtobase"){
+                    $(".res-part").html("");
+                    $(".res-part").html(base64Data);
+                }
+                else if(type == "basetoimg"){
+                    var imageData = $("#imgstring").val();
+                    $(".res-part").html("");
+                    $(".res-part").append("<img src='data:image/jpeg;base64," + imageData + "' alt='' />");
+                }
+                else{
+                    var url = $("#url").val();
+                    $("#loading").show();
+                    $.ajax({
+                        url : url,
+                        type: "post",
+                        cache: false,
+                        async: true,
+                        crossDomain: true,
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        data:JSON.stringify({image:base64Data}),
+                        success: function(res){
+                            $(".res-part").html("");
+                            $(".res-part2").html(""); 
+                            
+                            // *** PART 2: UPDATED success LOGIC (REPLACING THE JSON.stringify CALL) ***
+                            let breedName = "Prediction Error";
+                            let rawBreed = null;
 
-</script>
+                            try {
+                                // Extract the value from the 'image' key, checking for array or object response.
+                                if (Array.isArray(res) && res.length > 0 && res[0].image) {
+                                    rawBreed = res[0].image;
+                                } else if (typeof res === 'object' && res.image) {
+                                    rawBreed = res.image;
+                                }
+
+                                if (rawBreed) {
+                                    // Format the name for display (e.g., "German_shepherd" -> "German Shepherd")
+                                    breedName = formatBreedName(rawBreed);
+                                    
+                                    // Display the clean, friendly result
+                                    $(".res-part").html(`
+                                        <div class="flex flex-col items-center justify-center h-full">
+                                            <p class="text-xl text-gray-500 mb-2 font-semibold">The breed is:</p>
+                                            <p class="text-5xl font-extrabold text-[#f97316]">${breedName}</p>
+                                            <p class="text-base text-gray-400 mt-4">Prediction complete!</p>
+                                        </div>
+                                    `);
+                                } else {
+                                    // If we failed to find the breed name
+                                    $(".res-part").html("<p class='text-red-600 font-bold text-center text-lg'>❌ Result Error: Could not find breed name in JSON.</p>");
+                                    console.error("Backend JSON structure unexpected:", res);
+                                }
+
+                            } catch(e) {
+                                $(".res-part").html("<p class='text-red-600 font-bold text-center text-lg'>❌ Unexpected processing error.</p>");
+                                console.error("Error processing JSON result:", e);
+                            }
+                            // *** END OF UPDATED success LOGIC ***
+
+                            $("#loading").hide();
+                        },
+                        error: function(xhr, status, error) {
+                             $("#loading").hide();
+                             $(".res-part").html("<p class='text-red-600 font-bold text-center text-lg'>❌ Ruff! Classification Failed.</p><p class='text-red-500 text-base text-center'>Please check backend URL or server status.</p>");
+                             $(".res-part2").html(""); 
+                             console.error("AJAX Error:", status, error, xhr.responseText);
+                        }
+                    });
+                }
+            }
+        }
+
+        $(document).ready(function(){
+            $("#loading").hide();
+
+            $('#send').click(function(evt){
+                evt.preventDefault(); 
+                sendRequest(base_data);
+            });
+
+            $('#uload').click(function(evt) {
+                $('#fileinput').focus().trigger('click');
+            });
+            
+            $("#fileinput").change(function(){
+                if (this.files && this.files[0]){
+                    var reader = new FileReader();
+                    reader.onload = function (e){
+                        var url = e.target.result;
+                        var img = new Image();
+                        img.crossOrigin = 'Anonymous';
+                        img.onload = function(){
+                            var canvas = document.createElement('CANVAS');
+                            var ctx = canvas.getContext('2d');
+                            canvas.height = this.height;
+                            canvas.width = this.width;
+                            ctx.drawImage(this, 0, 0);
+                            
+                            // Using quality 0.8 for faster transmission
+                            base_data = canvas.toDataURL('image/jpeg', 0.8).replace(/^data:image.+;base64,/, '');
+                            canvas = null;
+                        };
+                        img.src = url;
+                        
+                        $('#photo').attr('src', url);
+                        $('#photo').show();
+                        $('#video').hide();
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+
+    </script>
 </body>
 </html>
